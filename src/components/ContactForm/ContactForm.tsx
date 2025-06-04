@@ -26,9 +26,26 @@ const ContactForm = () => {
   });
 
   const onSubmit = async (data: FormData) => {
-    // Replace with your submit logic (e.g., API call)
-    alert("Form submitted!\n" + JSON.stringify(data, null, 2));
-    reset();
+    try {
+      const response = await fetch('/.netlify/functions/store-contact-info', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.message || 'Something went wrong');
+      }
+      
+      reset(); // Reset form on success
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Failed to send message. Please try again later.');
+    }
   };
 
   return (

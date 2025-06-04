@@ -9,10 +9,11 @@
     "check": "bun run lint && tsc -b --noEmit",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
+    "firebase-admin": "^13.4.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.57.0",
@@ -20,6 +21,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
+    "@netlify/functions": "^4.1.2",
+    "@types/node": "^22.15.29",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
