@@ -116,8 +116,8 @@ const ContactForm = () => {
           {isSubmitting ? "Sending..." : "Send Message"}
         </button>
         {isSubmitSuccessful && (
-          <p style={{ color: "green", marginTop: "1rem" }}>Thank you for your message!</p>
-        )}
+          <p className={styles.successMessage}>Thank you for your message!</p>
+        )}        
       </form>
     </div>
   );

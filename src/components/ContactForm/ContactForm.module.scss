@@ -93,6 +93,13 @@
   resize: none;
 }
 
+.successMessage {
+  color: var(--color-input-border-active);
+  margin-top: 1rem;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .inputLabel {
   position: absolute;
   top: 10px;
