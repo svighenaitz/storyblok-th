@@ -17,7 +17,7 @@
 
 .row {
   display: flex;
-  gap: 20px;
+  gap: 0;
 }
 
 .row .fieldGroup {
@@ -25,6 +25,17 @@
   display: flex;
   flex-direction: column;
 }
+
+/* Remove border-radius where the two inputs touch */
+.row .fieldGroup:first-child input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.row .fieldGroup:last-child input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
 
 .fieldGroup {
   display: flex;
@@ -39,7 +50,7 @@
 }
 
 .errorMessage {
-  padding: 10px 0 0 10px;
+  padding: 5px 0 0 5px;
   font-size: 12px;
   color: var(--color-field-error);
 }
