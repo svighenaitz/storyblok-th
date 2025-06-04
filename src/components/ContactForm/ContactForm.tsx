@@ -1,50 +1,26 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import styles from "./ContactForm.module.scss";
+import { contactFormSchema } from "@/schemas/contactFormSchema";
+import type { ContactFormData } from "@/schemas/contactFormSchema";
+import { submitContactForm } from "@/services/contactFormService";
 
-const schema = yup.object({
-  firstName: yup.string().required("First name is required"),
-  lastName: yup.string().required("Last name is required"),
-  email: yup
-    .string()
-    .email("Enter a valid email address")
-    .required("Email is required"),
-  message: yup.string().required("Message is required"),
-});
-
-type FormData = yup.InferType<typeof schema>;
-
-const ContactForm = () => {
+const ContactForm: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isSubmitSuccessful },
     reset,
-  } = useForm<FormData>({
-    resolver: yupResolver(schema),
+  } = useForm<ContactFormData>({
+    resolver: yupResolver(contactFormSchema),
   });
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: ContactFormData) => {
     try {
-      const response = await fetch('/.netlify/functions/store-contact-info', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(result.message || 'Something went wrong');
-      }
-      
+      await submitContactForm(data);
       reset(); // Reset form on success
     } catch (error) {
-      console.error('Error submitting form:', error);
-      alert('Failed to send message. Please try again later.');
+      console.error('Failed to send message:', error);
     }
   };
 
