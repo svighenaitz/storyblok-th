@@ -4,9 +4,9 @@ import ContactForm from "./components/ContactForm/ContactForm";
 function App() {
 
   return (
-    <>
+    <div className="centeredFormParent">
       <ContactForm />
-    </>
+    </div>
   )
 }
 
