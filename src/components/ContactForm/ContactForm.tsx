@@ -108,7 +108,12 @@ const ContactForm = () => {
         </div>
         <p className={styles.privacyText}>
           For information about our privacy practices and commitment to protecting your privacy, please review our{' '}
-          <a href="#" className={styles.privacyLink}>
+          <a 
+            href="https://example.com/privacy-policy" 
+            className={styles.privacyLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Privacy Policy
           </a>.
         </p>
