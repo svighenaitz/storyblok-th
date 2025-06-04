@@ -44,7 +44,7 @@ const ContactForm = () => {
               {...register("firstName")}
             />
             {errors.firstName && (
-              <span style={{ color: "#c00", fontSize: "0.95em" }}>{errors.firstName.message}</span>
+              <span className={styles.errorMessage}>{errors.firstName.message}</span>
             )}
           </div>
           <div className={styles.fieldGroup} style={{ flex: 1 }}>
@@ -56,7 +56,7 @@ const ContactForm = () => {
               {...register("lastName")}
             />
             {errors.lastName && (
-              <span style={{ color: "#c00", fontSize: "0.95em" }}>{errors.lastName.message}</span>
+              <span className={styles.errorMessage}>{errors.lastName.message}</span>
             )}
           </div>
         </div>
@@ -69,7 +69,7 @@ const ContactForm = () => {
             {...register("email")}
           />
           {errors.email && (
-            <span style={{ color: "#c00", fontSize: "0.95em" }}>{errors.email.message}</span>
+            <span className={styles.errorMessage}>{errors.email.message}</span>
           )}
         </div>
         <div className={styles.fieldGroup}>
@@ -83,7 +83,7 @@ const ContactForm = () => {
             {...register("message")}
           />
           {errors.message && (
-            <span style={{ color: "#c00", fontSize: "0.95em" }}>{errors.message.message}</span>
+            <span className={styles.errorMessage}>{errors.message.message}</span>
           )}
         </div>
         <p className={styles.privacyText}>

@@ -1,13 +1,53 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 :root {
+  --color-input-border: #EDEFF2;
+  --color-placeholder: #74777E;
   --color-bg-form: #F1ECF6;
+  --color-field-error: #C00;
+  --color-input-border-active: #73467B;
 }
 
-html, body {
+html,
+body {
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 * {
   font-family: inherit;
+}
+
+input[type="email"],
+textarea {
+  width: 100%;
+}
+
+input,
+textarea {
+  border-radius: 8px;
+  border: 1px solid var(--color-input-border);
+  box-sizing: border-box;
+  padding: 18px;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+input:active,
+textarea:focus,
+textarea:active {
+  border-color: var(--color-input-border-active);
+  outline: none;
+}
+
+textarea {
+  height: 152px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: var(--color-placeholder);
 }
