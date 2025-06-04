@@ -43,6 +43,16 @@
   width: 100%;
 }
 
+.input {
+  transition: padding 0.2s;
+  
+  &:focus,
+  &:not(:placeholder-shown) {
+    padding-top: 28px;
+    padding-bottom: 8px;
+    line-height: 1.2;
+  }
+}
 
 .label {
   margin-bottom: 10px;
@@ -81,5 +91,21 @@
 
 .textarea {
   resize: none;
+}
+
+.inputLabel {
+  position: absolute;
+  top: 10px;
+  left: 18px;
+  font-size: 12px;
+  color: var(--color-placeholder);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.fieldGroup:focus-within .inputLabel,
+.fieldGroup:has(input:not(:placeholder-shown)) .inputLabel {
+  opacity: 1;
+  color: var(--color-input-border-active);
 }
 

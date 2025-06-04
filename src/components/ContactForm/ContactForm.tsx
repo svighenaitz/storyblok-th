@@ -35,7 +35,8 @@ const ContactForm = () => {
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className={styles.row}>
-          <div className={styles.fieldGroup} style={{ flex: 1 }}>
+          <div className={styles.fieldGroup} style={{ flex: 1, position: "relative" }}>
+            <label htmlFor="firstName" className={styles.inputLabel}>First name *</label>
             <input
               type="text"
               placeholder="First name *"
@@ -47,7 +48,8 @@ const ContactForm = () => {
               <span className={styles.errorMessage}>{errors.firstName.message}</span>
             )}
           </div>
-          <div className={styles.fieldGroup} style={{ flex: 1 }}>
+          <div className={styles.fieldGroup} style={{ flex: 1, position: "relative" }}>
+          <label htmlFor="lastName" className={styles.inputLabel}>Last name *</label>
             <input
               type="text"
               placeholder="Last name *"
@@ -60,7 +62,8 @@ const ContactForm = () => {
             )}
           </div>
         </div>
-        <div className={styles.fieldGroup}>
+        <div className={styles.fieldGroup} style={{ position: "relative" }}>
+          <label htmlFor="email" className={styles.inputLabel}>Work Email *</label>
           <input
             type="email"
             placeholder="Work Email *"
