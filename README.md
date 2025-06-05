@@ -36,7 +36,7 @@ This project implements a robust contact form with the following features:
 - Configured CI scripts for linting, testing, and coverage.
 - Documented setup, assumptions, and future improvements.
 
-### [Click here to see the Live Demo](#)
+### [Click here to see the Live Demo](https://storyblok-th.netlify.app/)
 
 ## Screenshots
 

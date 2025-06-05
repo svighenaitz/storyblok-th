@@ -3,4 +3,8 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-  }
+
+    @media (max-width: 600px) {
+       align-items: flex-start;
+      }
+}

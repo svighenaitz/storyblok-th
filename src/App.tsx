@@ -1,4 +1,4 @@
-import './App.scss'
+import styles from './App.module.scss'
 import ContactForm from "./components/ContactForm/ContactForm";
 import type { ContactFormData } from './schemas/contactFormSchema';
 import { submitContactForm } from './services/contactFormService';
@@ -15,7 +15,7 @@ function App() {
   };
 
   return (
-    <div className="centeredFormParent">
+    <div className={styles.centeredFormParent}>
       <ContactForm onSubmit={onSubmit}/>
     </div>
   )
