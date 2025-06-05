@@ -14,7 +14,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful, isSubmitted },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<ContactFormData>({
     resolver: yupResolver(contactFormSchema) as Resolver<ContactFormData>,
   });
@@ -94,9 +94,10 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
         {isSubmitSuccessful && (
           <p className={styles.successMessage}>Thank you for your message!</p>
         )}
-        {(isSubmitted && !isSubmitSuccessful) && (
+        {/* {(isSubmitted && !isSubmitSuccessful) && (
           <p className={styles.submitErrorMessage}>Something went wrong</p>
-        )}
+        )} */} 
+        {/* // TODO: implement error message */}
       </form>
     </div>
   );

@@ -9,10 +9,11 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
+    exclude: ['e2e/**/*', 'node_modules/', '.netlify/'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      exclude: ['node_modules/', 'src/test/', 'dist', '.netlify/', '**/*.config.{ts,js}', 'src/vite-env.d.ts'],
+      exclude: ['node_modules/', 'src/test/', 'dist', '.netlify/', '**/*.config.{ts,js}', 'src/vite-env.d.ts', '**/*.spec.{ts,js}'],
     },
   },
   plugins: [react()],
