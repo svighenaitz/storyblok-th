@@ -1,6 +1,6 @@
 .container {
-  width: 500px;
   
+  max-width: 500px;
   border-radius: 10px;
   padding: 40px;
   display: flex;
@@ -95,6 +95,14 @@
 
 .successMessage {
   color: var(--color-input-border-active);
+  margin-top: 1rem;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+.submitErrorMessage {
+  color: var(--color-field-error);
   margin-top: 1rem;
   font-size: 14px;
   line-height: 1.5;

@@ -1,72 +1,69 @@
 import { useForm } from "react-hook-form";
+import type { Resolver } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./ContactForm.module.scss";
 import { contactFormSchema } from "@/schemas/contactFormSchema";
 import type { ContactFormData } from "@/schemas/contactFormSchema";
-import { submitContactForm } from "@/services/contactFormService";
+import FormErrorMessage from "./FormErrorMessage";
 
-const ContactForm: React.FC = () => {
+interface ContactFormProps {
+  onSubmit: (data: ContactFormData) => Promise<void> | void;
+}
+
+const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
-    reset,
+    formState: { errors, isSubmitting, isSubmitSuccessful, isSubmitted },
   } = useForm<ContactFormData>({
-    resolver: yupResolver(contactFormSchema),
+    resolver: yupResolver(contactFormSchema) as Resolver<ContactFormData>,
   });
-
-  const onSubmit = async (data: ContactFormData) => {
-    try {
-      await submitContactForm(data);
-      reset(); // Reset form on success
-    } catch (error) {
-      console.error('Failed to send message:', error);
-    }
-  };
 
   return (
     <div className={styles.container}>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form 
+        data-testid="contact-form"
+        className={styles.form} 
+        onSubmit={handleSubmit(onSubmit)} 
+        noValidate
+      >
         <div className={styles.row}>
           <div className={styles.fieldGroup} style={{ flex: 1, position: "relative" }}>
             <label htmlFor="firstName" className={styles.inputLabel}>First name *</label>
             <input
+              id="firstName"
               type="text"
               placeholder="First name *"
               className={styles.input}
               autoComplete="given-name"
               {...register("firstName")}
             />
-            {errors.firstName && (
-              <span className={styles.errorMessage}>{errors.firstName.message}</span>
-            )}
+            <FormErrorMessage error={errors.firstName} />
           </div>
           <div className={styles.fieldGroup} style={{ flex: 1, position: "relative" }}>
             <label htmlFor="lastName" className={styles.inputLabel}>Last name *</label>
             <input
+              id="lastName"
               type="text"
               placeholder="Last name *"
               className={styles.input}
               autoComplete="family-name"
               {...register("lastName")}
             />
-            {errors.lastName && (
-              <span className={styles.errorMessage}>{errors.lastName.message}</span>
-            )}
+            <FormErrorMessage error={errors.lastName} />
           </div>
         </div>
         <div className={styles.fieldGroup} style={{ position: "relative" }}>
           <label htmlFor="email" className={styles.inputLabel}>Work Email *</label>
           <input
+            id="email"
             type="email"
             placeholder="Work Email *"
             className={styles.input}
             autoComplete="email"
             {...register("email")}
           />
-          {errors.email && (
-            <span className={styles.errorMessage}>{errors.email.message}</span>
-          )}
+          <FormErrorMessage error={errors.email} />
         </div>
         <div className={styles.fieldGroup}>
           <label className={styles.label} htmlFor="message">
@@ -78,9 +75,7 @@ const ContactForm: React.FC = () => {
             className={styles.textarea}
             {...register("message")}
           />
-          {errors.message && (
-            <span className={styles.errorMessage}>{errors.message.message}</span>
-          )}
+          <FormErrorMessage error={errors.message} />
         </div>
         <p className={styles.privacyText}>
           For information about our privacy practices and commitment to protecting your privacy, please review our{' '}
@@ -98,6 +93,9 @@ const ContactForm: React.FC = () => {
         </button>
         {isSubmitSuccessful && (
           <p className={styles.successMessage}>Thank you for your message!</p>
+        )}
+        {(isSubmitted && !isSubmitSuccessful) && (
+          <p className={styles.submitErrorMessage}>Something went wrong</p>
         )}
       </form>
     </div>
