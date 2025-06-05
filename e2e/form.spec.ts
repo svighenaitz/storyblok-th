@@ -68,5 +68,30 @@ test.describe('Contact Form E2E Tests', () => {
     await expect(errorMessages).toHaveCount(0);
   });
   
-  
+  test('should display error message when form submission fails', async ({ page }) => {
+    // Mock failed API response
+    await page.route('**/.netlify/functions/store-contact-info', async route => {
+      // Mock a server error response
+      await route.fulfill({
+        status: 500,
+        contentType: 'application/json',
+        body: JSON.stringify({ success: false, message: 'Server error' })
+      });
+    });
+    
+    // Fill in all fields correctly
+    await page.getByLabel('First name *').fill('John');
+    await page.getByLabel('Last name *').fill('Doe');
+    await page.getByLabel('Work Email *').fill('john.doe@example.com');
+    await page.getByLabel('Message *').fill('This is a test message');
+    
+    // Submit the form
+    await page.getByTestId('contact-form').getByRole('button', { name: 'Send Message' }).click();
+
+    // Verify the error message is displayed
+    await expect(page.getByText('Something went wrong with submission.')).toBeVisible({ timeout: 10000 });
+    
+    // Also verify that the button is enabled again after submission
+    await expect(page.getByRole('button', { name: 'Send Message' })).toBeEnabled();
+  });
 });

@@ -1,9 +1,9 @@
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import type { Resolver } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import type { Resolver } from "react-hook-form";
 import styles from "./ContactForm.module.scss";
-import { contactFormSchema } from "@/schemas/contactFormSchema";
-import type { ContactFormData } from "@/schemas/contactFormSchema";
+import { contactFormSchema, type ContactFormData } from "@/schemas/contactFormSchema";
 import FormErrorMessage from "./FormErrorMessage";
 
 interface ContactFormProps {
@@ -11,6 +11,8 @@ interface ContactFormProps {
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
+  const [submitError, setSubmitError] = useState<boolean>(false);
+  
   const {
     register,
     handleSubmit,
@@ -18,13 +20,25 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
   } = useForm<ContactFormData>({
     resolver: yupResolver(contactFormSchema) as Resolver<ContactFormData>,
   });
+  
+  const handleFormSubmit = async (data: ContactFormData) => {
+    try {
+      setSubmitError(false);
+      await onSubmit(data);
+      // If we get here, submission was successful
+    } catch (error) {
+      // If onSubmit throws an error, we can catch it here
+      console.error('Form submission error:', error);
+      setSubmitError(true);
+    }
+  };
 
   return (
     <div className={styles.container}>
       <form 
         data-testid="contact-form"
         className={styles.form} 
-        onSubmit={handleSubmit(onSubmit)} 
+        onSubmit={handleSubmit(handleFormSubmit, (errors) => console.log(errors))} 
         noValidate
       >
         <div className={styles.row}>
@@ -91,13 +105,13 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
         <button type="submit" className={styles.button} disabled={isSubmitting}>
           {isSubmitting ? "Sending..." : "Send Message"}
         </button>
-        {isSubmitSuccessful && (
+        {(!submitError && isSubmitSuccessful) && (
           <p className={styles.successMessage}>Thank you for your message!</p>
         )}
-        {/* {(isSubmitted && !isSubmitSuccessful) && (
-          <p className={styles.submitErrorMessage}>Something went wrong</p>
-        )} */} 
-        {/* // TODO: implement error message */}
+        {submitError && (
+          <p className={styles.submitErrorMessage} data-testid="submit-error">Something went wrong with submission.</p>
+        )} 
+        
       </form>
     </div>
   );
