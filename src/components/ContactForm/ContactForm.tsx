@@ -42,7 +42,7 @@ const ContactForm: React.FC = () => {
             )}
           </div>
           <div className={styles.fieldGroup} style={{ flex: 1, position: "relative" }}>
-          <label htmlFor="lastName" className={styles.inputLabel}>Last name *</label>
+            <label htmlFor="lastName" className={styles.inputLabel}>Last name *</label>
             <input
               type="text"
               placeholder="Last name *"
@@ -84,8 +84,8 @@ const ContactForm: React.FC = () => {
         </div>
         <p className={styles.privacyText}>
           For information about our privacy practices and commitment to protecting your privacy, please review our{' '}
-          <a 
-            href="https://example.com/privacy-policy" 
+          <a
+            href="https://example.com/privacy-policy"
             className={styles.privacyLink}
             target="_blank"
             rel="noopener noreferrer"
@@ -98,7 +98,7 @@ const ContactForm: React.FC = () => {
         </button>
         {isSubmitSuccessful && (
           <p className={styles.successMessage}>Thank you for your message!</p>
-        )}        
+        )}
       </form>
     </div>
   );
