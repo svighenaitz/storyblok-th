@@ -12,7 +12,7 @@ interface ContactFormProps {
 
 const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
   const [submitError, setSubmitError] = useState<boolean>(false);
-  
+
   const {
     register,
     handleSubmit,
@@ -20,7 +20,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
   } = useForm<ContactFormData>({
     resolver: yupResolver(contactFormSchema) as Resolver<ContactFormData>,
   });
-  
+
   const handleFormSubmit = async (data: ContactFormData) => {
     try {
       setSubmitError(false);
@@ -35,10 +35,10 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
 
   return (
     <div className={styles.container}>
-      <form 
+      <form
         data-testid="contact-form"
-        className={styles.form} 
-        onSubmit={handleSubmit(handleFormSubmit, (errors) => console.log(errors))} 
+        className={styles.form}
+        onSubmit={handleSubmit(handleFormSubmit, (errors) => console.log(errors))}
         noValidate
       >
         <div className={styles.row}>
@@ -110,8 +110,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
         )}
         {submitError && (
           <p className={styles.submitErrorMessage} data-testid="submit-error">Something went wrong with submission.</p>
-        )} 
-        
+        )}
+
       </form>
     </div>
   );

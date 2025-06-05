@@ -121,6 +121,6 @@
 .fieldGroup:focus-within .inputLabel,
 .fieldGroup:has(input:not(:placeholder-shown)) .inputLabel {
   opacity: 1;
-  color: var(--color-input-border-active);
+  /* Keep the original color as defined in .inputLabel */
 }
 
