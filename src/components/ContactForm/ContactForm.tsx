@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSubmission } from "@/contexts/SubmissionContext";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import type { Resolver } from "react-hook-form";
@@ -21,11 +22,14 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
     resolver: yupResolver(contactFormSchema) as Resolver<ContactFormData>,
   });
 
+  const { triggerRefresh } = useSubmission();
+
   const handleFormSubmit = async (data: ContactFormData) => {
     try {
       setSubmitError(false);
       await onSubmit(data);
       // If we get here, submission was successful
+      triggerRefresh(); // Trigger refresh of submissions
     } catch (error) {
       // If onSubmit throws an error, we can catch it here
       console.error('Form submission error:', error);
