@@ -38,14 +38,6 @@ This project implements a robust contact form with the following features:
 
 ### [Click here to see the Live Demo](https://storyblok-th.netlify.app/)
 
-## Screenshots
-
-<div align="center">
-
-<img src="docs/screenshot.png" alt="Contact Form Screenshot" style="max-height:220px; max-width:100%; height:auto; width:auto;" />
-
-</div>
-
 ## Assumptions
 - Firebase credentials and database URL are securely provided via environment variables.
 - The Netlify Function is properly configured and deployed for backend operations.
