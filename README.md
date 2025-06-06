@@ -6,9 +6,9 @@
 
 A full-stack React + TypeScript application for submitting contact requests, featuring real-time validation, backend storage via Netlify Functions and Firebase, and a modern, accessible UI.
 
-[Giuliano De Ianni](mailto:giulianodeioannigcp@gmail.com)
+[Giuliano De Ioanni](mailto:giulianodeioannigcp@gmail.com)
 
-### [Click here to see the Video Review](#)
+### [Click here to see the Video Review](https://www.loom.com/share/67f9907abff441439c39ec4a4b6e0b95?sid=fb067f12-1d92-402a-8b58-efae2b28dd4f)
 
 ## Proposed Solution
 
